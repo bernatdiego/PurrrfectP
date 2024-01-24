@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purrrfect Polyglot</title>
+    <style>
+        .left {
+            float: left;
+            padding-left: 10px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .right {
+            float: right;
+            padding-left: 10px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .imagen {
+            width: 50px; 
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .userLogo {
+            width: 30px;
+            height: 30px; 
+            margin-top: 15px;
+            margin-left: 20px;
+        }
+
+        p {
+            font-family: 'Montserrat SemiBold', sans-serif; 
+            color: #008b8b; 
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white; /* Set background color to white */
+            color: black; /* Set text color to black */
+        }
+
+        header {
+            background-color: white; /* Set header background color to white */
+            color: black;
+            text-align: justify;
+            padding: 1em;
+            font-size: 20px; /* Set font size to 20px */
+            padding-right: 80px; /* Add more padding to the right side */
+            padding-top: 40px; /* Add padding to the top */
+        }
+
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 100px;
+            text-align: left;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: inline-block;
+            vertical-align: left;
+        }
+
+        .text-container {
+            display: inline-block;
+            vertical-align: top;
+            font-size: 42px;
+            margin-left: 20px; /* Adjust the margin as needed */
+            text-align: center; /* Align text to the center */
+        }
+
+        .text-container p {
+            margin-bottom: 10px; /* Add margin below the paragraph */
+        }
+
+       .text-container button {
+        display: block;
+        font-size: 18px;
+        width: 200px;
+        height: 50px;
+        margin-top: 20px;
+        margin-left: auto; /* Cambié el valor a "auto" para centrar el botón */
+        margin-right: auto; /* Cambié el valor a "auto" para centrar el botón */
+        background-color: #008B8B;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 20px;
+    }
+
+        footer {
+            background-color: white; /* Set footer background color to white */
+            color: black;
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="left">
+            <img src="..\logoMini.jpg" alt="Descripción de la imagen" class="imagen">
+            <p>Purrrfect Polyglot</p>
+        </div>
+        <div class="right">
+            <p>Mi Usuario</p>
+            <img src="..\miUsuarioLogo.png" alt="User Icon" class="userLogo">
+        </div>
+    </header>
+
+    <main>
+        <img src="solicitar_rembolso.png" alt="Description of the image" width="500" style="padding-left: 75px; padding-top: 60px;">
+        <div class="text-container">
+            <p>You can request <br> refund here</p>
+            <button>Request Refund</button>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2023 Your Website. All rights reserved.
+    </footer>
+
+</body>
+</html>
