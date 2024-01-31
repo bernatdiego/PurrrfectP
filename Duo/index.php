@@ -2,6 +2,7 @@
 <html lang="es">
 <?php include('DB/db.php');?>
 <?php include('templates/header.php');?>
+<link rel="stylesheet" href="css/login.css">
     <div class="container flow-text">
     <body>
 

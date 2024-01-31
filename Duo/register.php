@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-
+<link rel="stylesheet" href="css/register.css">
 <?php include('templates/header.php'); ?>
 <?php include('DB/db.php');
 
@@ -54,40 +54,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="username" class="form-control" />
                       <label class="form-label" for="username">Your Name</label>
+                      <input type="text" id="username" class="form-control" />
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="email" id="email" class="form-control" />
                       <label class="form-label" for="email">Your Email</label>
+                      <input type="email" id="email" class="form-control" />
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="password" class="form-control" />
                       <label class="form-label" for="password">Password</label>
+                      <input type="password" id="password" class="form-control" />
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="password2" class="form-control" />
                       <label class="form-label" for="password2">Repeat your password</label>
+                      <input type="password" id="password2" class="form-control" /> 
                     </div>
                   </div>
 
                   <div class="form-check d-flex justify-content-center mb-5">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
-                    <label class="form-check-label" for="form2Example3">
-                      I agree all statements in <a href="#!">Terms of service</a>
-                    </label>
+                      <label class="form-check-label d-flex align-items-center" for="form2">
+                          <span>I agree all statements in <a href="#!">Terms of service</a></span>
+                          <input class="form-check-input me-2" type="checkbox" value="" id="form2" />
+                      </label>
                   </div>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">

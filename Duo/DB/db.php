@@ -10,6 +10,37 @@ function createTableUsers($db) {
     $db->exec($sql);
 }
 
+function createTableLevels($db){
+    $sql = "CREATE TABLE IF NOT EXISTS niveles (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nombre TEXT UNIQUE,
+        respuestasT INTEGER
+    )";
+    $db->exec($sql);
+}
+
+function createTableLessons($db){
+    $sql = "CREATE TABLE IF NOT EXISTS temas (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nombre TEXT UNIQUE
+    )";
+    $db->exec($sql);
+}
+
+function createTableScores($db) {
+    $sql = "CREATE TABLE IF NOT EXISTS puntuacion (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        nivel_id INTEGER,
+        tema_id INTEGER,
+        correctas INTEGER,
+        FOREIGN KEY(user_id) REFERENCES users(id),
+        FOREIGN KEY(tema_id) REFERENCES temas(id),
+        FOREIGN KEY(nivel_id) REFERENCES niveles(id)
+    )";
+    $db->exec($sql);
+}
+
 function registerUser($db, $username, $email, $password) {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $sql = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
@@ -41,6 +72,9 @@ try {
     $db = new PDO("sqlite:$dbPath");
 
     createTableUsers($db);
+    createTableLevels($db);
+    createTableScores($db);
+    createTableLessons($db);
 
     // Ejemplo de registro de usuario
     //registerUser($db, 'carlos123', 'carlos@gmail.com', '123456');
@@ -51,7 +85,7 @@ try {
     if (isset($loggedInUser) && $loggedInUser) {
         echo "Inicio de sesión exitoso. Usuario: " . $loggedInUser['username'];
     } else {
-        echo "Error en el inicio de sesión. Credenciales incorrectas.";
+        //echo "Error en el inicio de sesión. Credenciales incorrectas.";
     } 
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
