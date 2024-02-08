@@ -3,6 +3,12 @@
 
 <?php
 include('./templates/header.php');
+// Comprobar si hay una sesión iniciada
+if (isset($_SESSION['user_id'])) {
+  // Redirigir a asignaturas.php si hay una sesión iniciada
+  header('Location: ./pages');
+  exit();
+}
 ?>
 
 

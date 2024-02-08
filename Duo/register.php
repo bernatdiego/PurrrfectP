@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <link rel="stylesheet" href="css/register.css">
-<?php include('./templates/header.php');?>
+<?php include('./templates/header.php');
+// Comprobar si hay una sesión iniciada
+if (isset($_SESSION['user_id'])) {
+  // Redirigir a asignaturas.php si hay una sesión iniciada
+  header('Location: ./pages');
+  exit();
+}?>
 
 <div class="container flow-text">
     <body>
