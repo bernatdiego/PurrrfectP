@@ -1,39 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <link rel="stylesheet" href="css/register.css">
-<?php include('templates/header.php'); ?>
-<?php include('DB/db.php');
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (
-        isset($_POST['username']) &&
-        isset($_POST['email']) &&
-        isset($_POST['password']) &&
-        isset($_POST['password2'])
-    ) {
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $password2 = $_POST['password2'];
-
-        // Validaciones en el lado del servidor
-        if (empty($username) || empty($email) || empty($password) || empty($password2)) {
-            echo "Todos los campos son obligatorios.";
-        } elseif (strlen($password) < 6) {
-            echo "La contraseña debe tener al menos 6 caracteres.";
-        } elseif ($password !== $password2) {
-            echo "Las contraseñas no coinciden.";
-        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            echo "El formato del correo electrónico no es válido.";
-        } else {
-            // Llamo metodo Register
-            registerUser($db, $username, $email, $password);
-            header('Location: index.php');
-            exit();
-        }
-    }
-}
-?>
+<?php include('./templates/header.php');?>
 
 <div class="container flow-text">
     <body>
@@ -49,13 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
-                <form class="mx-1 mx-md-4" method="post" action="register.php" onsubmit="return validateForm()">
+                <form class="mx-1 mx-md-4" method="post" action="./DB/bd_register.php" onsubmit="return validateForm()">
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <label class="form-label" for="username">Your Name</label>
-                      <input type="text" id="username" class="form-control" />
+                      <input type="text" id="username" name="username" class="form-control" />
                     </div>
                   </div>
 
@@ -63,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <label class="form-label" for="email">Your Email</label>
-                      <input type="email" id="email" class="form-control" />
+                      <input type="email" id="email" name="email" class="form-control" />
                     </div>
                   </div>
 
@@ -71,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <label class="form-label" for="password">Password</label>
-                      <input type="password" id="password" class="form-control" />
+                      <input type="password" id="password" name="password" class="form-control" />
                     </div>
                   </div>
 
@@ -79,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <label class="form-label" for="password2">Repeat your password</label>
-                      <input type="password" id="password2" class="form-control" /> 
+                      <input type="password" id="password2" name="password2" class="form-control" /> 
                     </div>
                   </div>
 
@@ -91,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   </div>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                    <button type="submit" name="submit" value="submit" class="btn btn-primary btn-lg">Register</button>
                   </div>
 
                   <!-- Mensajes de error -->

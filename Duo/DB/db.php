@@ -51,6 +51,7 @@ function registerUser($db, $username, $email, $password) {
     $stmt->execute();
 }
 
+
 function loginUser($db, $username, $password) {
     $sql = "SELECT * FROM users WHERE username = :username";
     $stmt = $db->prepare($sql);
@@ -64,23 +65,36 @@ function loginUser($db, $username, $password) {
         return null; // Autenticación fallida
     }
 }
-//Funcion tabla
-//Bernat y sus formularios
+
+// CONNECTION
+if ($_SERVER['HTTP_HOST'] == "localhost") {
+    // For localhost
+    $dbPath = 'C:\xampp\htdocs\AD\Duo\DB\sqlLite\Purrrfect_Polyglot.sqlite'; // Replace with the actual path to your SQLite database file
+} else {
+    // For remote host
+    $dbPath = 'path/to/dampp.db'; // Replace with the actual path to your SQLite database file
+}
 
 try {
-    $dbPath = 'C:\xampp\htdocs\AD\Duo\DB\sqlLite\Purrrfect_Polyglot.sqlite';
-    $db = new PDO("sqlite:$dbPath");
+    $conn = new PDO("sqlite:$dbPath");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    createTableUsers($db);
-    createTableLevels($db);
-    createTableScores($db);
-    createTableLessons($db);
+    // Check the connection
+    if (!$conn) {
+        echo 'Error de conexión: No se pudo conectar a la base de datos.';
+    }
+
+    // Crear tablas si no existen
+    createTableUsers($conn);
+    createTableLevels($conn);
+    createTableScores($conn);
+    createTableLessons($conn);
 
     // Ejemplo de registro de usuario
-    //registerUser($db, 'carlos123', 'carlos@gmail.com', '123456');
+    //registerUser($conn, 'carlos123', 'carlos@gmail.com', '123456');
 
     // Ejemplo de inicio de sesión
-    //$loggedInUser = loginUser($db, 'carlos123', '123456');
+    //$loggedInUser = loginUser($conn, 'carlos123', '123456');
     
     if (isset($loggedInUser) && $loggedInUser) {
         echo "Inicio de sesión exitoso. Usuario: " . $loggedInUser['username'];
@@ -88,6 +102,7 @@ try {
         //echo "Error en el inicio de sesión. Credenciales incorrectas.";
     } 
 } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    echo 'Error de conexión: ' . $e->getMessage();
 }
 ?>
+

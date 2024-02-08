@@ -1,29 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<?php include('templates/header.php');?>
-<?php include('DB/db.php');
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['username']) && isset($_POST['password'])) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
-        // Validación en el lado del servidor
-        if (empty($username) || empty($password)) {
-            echo "Por favor, completa todos los campos.";
-        } else {
-            $loggedInUser = loginUser($db, $username, $password);
-
-            if ($loggedInUser) {
-                header('Location: index.php');
-                exit();
-            } else {
-                echo "Error en el inicio de sesión. Credenciales incorrectas.";
-            }
-        }
-    }
-}
+<?php
+include('./templates/header.php');
 ?>
+
 
 <div class="container flow-text">
 <body>
@@ -41,7 +22,7 @@
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5 text-black">
 
-                <form method="post" action="login.php" onsubmit="return validateForm()">
+                <form method="POST" action="./DB/bd_login.php" onsubmit="return validateForm()">
 
                   <div class="d-flex align-items-center mb-3 pb-1">
                     <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
@@ -51,17 +32,17 @@
                   <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
 
                   <div class="form-outline mb-4">
-                    <input type="text" id="username" class="form-control form-control-lg" />
+                    <input type="text" id="username" name="username" class="form-control form-control-lg" />
                     <label class="form-label" for="username">Username</label>
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="password" id="password" class="form-control form-control-lg" />
+                    <input type="password" name="password" id="password" class="form-control form-control-lg" />
                     <label class="form-label" for="password">Password</label>
                   </div>
 
                   <div class="pt-1 mb-4">
-                    <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                    <button class="btn btn-dark btn-lg btn-block" name="submit" value="submit" type="submit">Login</button>
                   </div>
 
                   <a class="small text-muted" href="#!">Forgot password?</a>
