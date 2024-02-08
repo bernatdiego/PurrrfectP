@@ -13,10 +13,42 @@ include('../DB/db.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
+<link rel="stylesheet" href="../css/cards.css">
 <body class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-    <section>
-        <!-- Contenido de tu sección aquí -->
+    <section class="d-flex justify-content-center">
         <!--//Listado de Cards-->
+        <div class="container">
+        <div class="card neon-effect">
+            <div class="content">
+                <h2>Grammar</h2>
+                <a href="./grammar.php">Grammar</a>
+            </div>
+        </div>
+        <div class="card neon-effect">
+            <div class="content">
+                <h2>Listening</h2>
+                <a href="./listening.php">Listening</a>
+            </div>
+        </div>
+        <div class="card neon-effect">
+            <div class="content">
+                <h2>Reading</h2>
+                <a href="./reading.php">Reading</a>
+            </div>
+        </div>
+        <div class="card neon-effect">
+            <div class="content">
+                <h2>Speaking</h2>
+                <a href="./speaking.php">Speaking</a>
+            </div>
+        </div>
+        <div class="card neon-effect">
+            <div class="content">
+                <h2>Vocabulary</h2>
+                <a href="./vocabulary.php">Vocabulary</a>
+            </div>
+        </div>
+    </div>
     </section>
 </body>
 </html>
