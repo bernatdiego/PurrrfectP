@@ -10,6 +10,37 @@ function createTableUsers($db) {
     $db->exec($sql);
 }
 
+function createTableLevels($db){
+    $sql = "CREATE TABLE IF NOT EXISTS niveles (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nombre TEXT UNIQUE,
+        respuestasT INTEGER
+    )";
+    $db->exec($sql);
+}
+
+function createTableLessons($db){
+    $sql = "CREATE TABLE IF NOT EXISTS temas (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nombre TEXT UNIQUE
+    )";
+    $db->exec($sql);
+}
+
+function createTableScores($db) {
+    $sql = "CREATE TABLE IF NOT EXISTS puntuacion (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        nivel_id INTEGER,
+        tema_id INTEGER,
+        correctas INTEGER,
+        FOREIGN KEY(user_id) REFERENCES users(id),
+        FOREIGN KEY(tema_id) REFERENCES temas(id),
+        FOREIGN KEY(nivel_id) REFERENCES niveles(id)
+    )";
+    $db->exec($sql);
+}
+
 function registerUser($db, $username, $email, $password) {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $sql = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
@@ -19,6 +50,7 @@ function registerUser($db, $username, $email, $password) {
     $stmt->bindParam(':password', $hashedPassword, PDO::PARAM_STR);
     $stmt->execute();
 }
+
 
 function loginUser($db, $username, $password) {
     $sql = "SELECT * FROM users WHERE username = :username";
@@ -33,27 +65,44 @@ function loginUser($db, $username, $password) {
         return null; // Autenticación fallida
     }
 }
-//Funcion tabla
-//Bernat y sus formularios
+
+// CONNECTION
+if ($_SERVER['HTTP_HOST'] == "localhost") {
+    // For localhost
+    $dbPath = 'C:\xampp\htdocs\AD\Duo\DB\sqlLite\Purrrfect_Polyglot.sqlite'; // Replace with the actual path to your SQLite database file
+} else {
+    // For remote host
+    $dbPath = 'path/to/dampp.db'; // Replace with the actual path to your SQLite database file
+}
 
 try {
-    $dbPath = 'C:\xampp\htdocs\AD\Duo\DB\sqlLite\Purrrfect_Polyglot.sqlite';
-    $db = new PDO("sqlite:$dbPath");
+    $conn = new PDO("sqlite:$dbPath");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    createTableUsers($db);
+    // Check the connection
+    if (!$conn) {
+        echo 'Error de conexión: No se pudo conectar a la base de datos.';
+    }
+
+    // Crear tablas si no existen
+    createTableUsers($conn);
+    createTableLevels($conn);
+    createTableScores($conn);
+    createTableLessons($conn);
 
     // Ejemplo de registro de usuario
-    //registerUser($db, 'carlos123', 'carlos@gmail.com', '123456');
+    //registerUser($conn, 'carlos123', 'carlos@gmail.com', '123456');
 
     // Ejemplo de inicio de sesión
-    //$loggedInUser = loginUser($db, 'carlos123', '123456');
+    //$loggedInUser = loginUser($conn, 'carlos123', '123456');
     
     if (isset($loggedInUser) && $loggedInUser) {
         echo "Inicio de sesión exitoso. Usuario: " . $loggedInUser['username'];
     } else {
-        echo "Error en el inicio de sesión. Credenciales incorrectas.";
+        //echo "Error en el inicio de sesión. Credenciales incorrectas.";
     } 
 } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    echo 'Error de conexión: ' . $e->getMessage();
 }
 ?>
+
